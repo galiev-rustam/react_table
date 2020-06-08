@@ -1,0 +1,178 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+table {
+  min-width: 100vw;
+  width: auto;
+  flex: 1;
+  display: grid;
+  border-collapse: collapse;
+  /* These are just initial values which are overriden using JavaScript when a column is resized */
+  grid-template-columns: 
+    minmax(100px, 1fr)
+    minmax(100px, 1.67fr)
+    minmax(100px, 1.67fr)
+    minmax(100px, 1.67fr);
+}
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+th,
+td {
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #6c7ae0;
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.1rem;
+  color: white;
+  position: relative;
+}
+
+th:last-child {
+  border: 0;
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0;
+  width: 3px;
+  cursor: col-resize;
+}
+
+.resize-handle:hover,
+/* The following selector is needed so the handle is visible during resize even if the mouse isn't over the handle anymore */
+.header--being-resized .resize-handle {
+  opacity: 0.5;
+}
+
+th:hover .resize-handle {
+  opacity: 0.3;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #808080;
+}
+
+tr:nth-child(even) td {
+  background: #f8f6ff;
+}
+
+.newEl {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 40px 0;
+}
+
+
+.button {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 50px;
+}
+a.addEl {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(52, 147, 230);
+  box-shadow: 0 -3px rgb(27, 27, 148) inset;
+  transition: 0.2s;
+} 
+
+a.addEl:hover { 
+  background: rgb(95, 54, 206); 
+}
+
+a.addEl:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.info {
+  display: inline-block;
+  padding: 50px;
+  border: 10px solid #2B58A4;
+  border-radius: 40px;
+  text-align: center;
+  margin: 50px 40%;
+  width: 20%;
+
+}
+
+.info b:first-child {
+  margin-bottom: 30px;
+  font-size: larger;
+}
+
+.color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colorLabel {
+  margin-right: 20px;
+  
+}
+
+
+
+
+@media (max-width: 850px) {
+  body {
+    font-size: 1.0rem;
+  }
+  th, td {
+    font-size: 0.7rem;
+  }
+
+  .newEl {
+    flex-direction: column;
+    margin-bottom: 50px;
+
+  }
+
+  .newEl label {
+    margin-bottom: 10px;
+  }
+
+  .info {
+    margin: 50px 10%;
+    width: 80%;
+  }
+}
+
+
+
