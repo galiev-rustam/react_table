@@ -1,4 +1,7 @@
-## При клике на строку выводится ее описание, при двойном клике удаляется данная строка
+## Редактор табличных данных
+
+При клике на строку выводится ее описание, при двойном клике удаляется данная строка
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
