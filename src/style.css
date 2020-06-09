@@ -9,7 +9,9 @@ body {
 }
 
 body {
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
 }
 
 table {
@@ -19,7 +21,7 @@ table {
   display: grid;
   border-collapse: collapse;
   /* These are just initial values which are overriden using JavaScript when a column is resized */
-  grid-template-columns: 
+  grid-template-columns:
     minmax(100px, 1fr)
     minmax(100px, 1.67fr)
     minmax(100px, 1.67fr)
@@ -99,36 +101,35 @@ tr:nth-child(even) td {
 
   margin-top: 50px;
 }
-a.addEl {
+button.addEl {
   font-weight: 700;
   color: white;
   text-decoration: none;
-  padding: .8em 1em calc(.8em + 3px);
+  padding: 0.8em 1em calc(0.8em + 3px);
   border-radius: 3px;
   background: rgb(52, 147, 230);
   box-shadow: 0 -3px rgb(27, 27, 148) inset;
   transition: 0.2s;
   margin-bottom: 20px;
-} 
-
-a.addEl:hover { 
-  background: rgb(95, 54, 206); 
 }
 
-a.addEl:active {
-  background: rgb(33,147,90);
-  box-shadow: 0 3px rgb(33,147,90) inset;
+button.addEl:hover {
+  background: rgb(95, 54, 206);
+}
+
+button.addEl:active {
+  background: rgb(33, 147, 90);
+  box-shadow: 0 3px rgb(33, 147, 90) inset;
 }
 
 .info {
   display: inline-block;
   padding: 50px;
-  border: 10px solid #2B58A4;
+  border: 10px solid #2b58a4;
   border-radius: 40px;
   text-align: center;
   margin: 50px 40%;
   width: 20%;
-
 }
 
 .info b:first-child {
@@ -144,7 +145,6 @@ a.addEl:active {
 
 .colorLabel {
   margin-right: 20px;
-  
 }
 
 .localStorage div {
@@ -155,32 +155,29 @@ a.addEl:active {
 
 .exportData button,
 .importData button,
-.clearData button
-{
+.clearData button {
   font-weight: 700;
   color: white;
   text-decoration: none;
-  padding: .8em 1em calc(.8em + 3px);
+  padding: 0.8em 1em calc(0.8em + 3px);
   border-radius: 3px;
   background: rgb(52, 147, 230);
   box-shadow: 0 -3px rgb(27, 27, 148) inset;
   transition: 0.2s;
 }
 
-
-
 @media (max-width: 850px) {
   body {
-    font-size: 1.0rem;
+    font-size: 1rem;
   }
-  th, td {
+  th,
+  td {
     font-size: 0.7rem;
   }
 
   .newEl {
     flex-direction: column;
     margin-bottom: 50px;
-
   }
 
   .newEl label {
@@ -192,6 +189,3 @@ a.addEl:active {
     width: 80%;
   }
 }
-
-
-
