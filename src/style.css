@@ -93,7 +93,6 @@ tr:nth-child(even) td {
   margin: 40px 0;
 }
 
-
 .button {
   display: flex;
   justify-content: center;
@@ -109,6 +108,7 @@ a.addEl {
   background: rgb(52, 147, 230);
   box-shadow: 0 -3px rgb(27, 27, 148) inset;
   transition: 0.2s;
+  margin-bottom: 20px;
 } 
 
 a.addEl:hover { 
@@ -147,6 +147,25 @@ a.addEl:active {
   
 }
 
+.localStorage div {
+  margin: 20px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.exportData button,
+.importData button,
+.clearData button
+{
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(52, 147, 230);
+  box-shadow: 0 -3px rgb(27, 27, 148) inset;
+  transition: 0.2s;
+}
 
 
 

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import './style.css';
 import Table from './Table';
 import rowsData from './rowsData';
 import _ from 'lodash';
 import Info from './Info';
 import { CompactPicker } from 'react-color';
-
+import LocalStorage from './localStorage';
 
 class App extends React.Component {
   constructor() {
@@ -24,9 +24,8 @@ class App extends React.Component {
 
     this.addRow = this.addRow.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
+    this.removeDuplicates = this.removeDuplicates.bind(this);
   }
-
 
   addRow(e) {
     e.preventDefault();
@@ -41,23 +40,20 @@ class App extends React.Component {
       type: this.state.type,
       color: this.state.color,
     })
-    console.log(newArr);
+    // console.log(newArr);
+
     this.setState({
-      rows: newArr,
+      rows: this.removeDuplicates(newArr),
     })
 
   };
 
   handleChange(event) {
-    const { name, value, type, checked } = event.target
-    type === "checkbox" ?
-      this.setState({
-        [name]: checked
-      })
-      :
-      this.setState({
-        [name]: value
-      })
+    const { name, value, type } = event.target;
+
+    this.setState({
+      [name]: value
+    })
   };
 
   onSort = sortField => {
@@ -93,6 +89,80 @@ class App extends React.Component {
     this.setState({ color: color.hex });
   };
 
+  exportData = () => {
+
+    for (let i = 0; i < this.state.rows.length; i++) {
+      let strRows = []
+      strRows.push(JSON.stringify(this.state.rows[i]))
+      localStorage.setItem(i, strRows);  // this.state.rows[i]["id"]
+    }
+  }
+
+  importData = () => {
+    // console.log(localStorage.length);
+    let newArr = this.state.rows;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      newArr.push(JSON.parse(localStorage.getItem(i)));
+    }
+
+    //console.log(newArr);
+    this.setState({
+      rows: this.removeDuplicates(newArr),
+    })
+
+  }
+  //очищаем localStorage при клике
+  clearData = () => {
+    localStorage.clear();
+  }
+
+  //поиск дубликатов и их удаление
+  removeDuplicates(arr) {
+
+    const result = [];
+    const duplicatesIndices = [];
+
+    // Перебираем каждый элемент в исходном массиве
+    arr.forEach((current, index) => {
+
+      if (duplicatesIndices.includes(index)) return;
+
+      result.push(current);
+
+      // Сравниваем каждый элемент в массиве после текущего
+      for (let comparisonIndex = index + 1; comparisonIndex < arr.length; comparisonIndex++) {
+
+        const comparison = arr[comparisonIndex];
+        const currentKeys = Object.keys(current);
+        const comparisonKeys = Object.keys(comparison);
+
+
+        if (currentKeys.length !== comparisonKeys.length) continue;
+
+
+        const currentKeysString = currentKeys.sort().join("").toLowerCase();
+        const comparisonKeysString = comparisonKeys.sort().join("").toLowerCase();
+        if (currentKeysString !== comparisonKeysString) continue;
+
+        // Проверяем индексы ключей
+        let valuesEqual = true;
+        for (let i = 0; i < currentKeys.length; i++) {
+          const key = currentKeys[i];
+          if (current[key] !== comparison[key]) {
+            valuesEqual = false;
+            break;
+          }
+        }
+        if (valuesEqual) duplicatesIndices.push(comparisonIndex);
+
+      } // Конец цикла
+    });
+    return result;
+  }
+
+
+
   render() {
 
     return (
@@ -121,7 +191,6 @@ class App extends React.Component {
           <div className='color'>
             <span className="colorLabel">Color:&ensp;</span>
             <CompactPicker color={this.state.color} onChangeComplete={this.handleChangeComplete} />
-
           </div>
 
         </div>
@@ -133,14 +202,16 @@ class App extends React.Component {
           this.state.info ? <Info info={this.state.info} /> : null
         }
 
+        <LocalStorage
+          exportData={this.exportData}
+          importData={this.importData}
+          clearData={this.clearData}
+        />
 
       </div>
     );
   }
 }
-
-
-/* <input type="color" name="color" value={this.state.color} onChange={this.handleChange} /> */
 
 
 export default App;
